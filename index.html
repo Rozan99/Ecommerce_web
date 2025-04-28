@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Male-Closet | Premium Men's Fashion</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body>
+        <!-- Header Section -->
+        <header>
+            <div class="logo-container">
+                <img src="images/logo.png" alt="Male-Closet Logo" class="logo">
+                <h1 class="site-title">Male-Closet</h1>
+            </div>
+            <div class="header-right">
+                <div class="search-social">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search products...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button id="login-btn" class="auth-btn">Login</button>
+                    <button id="signup-btn" class="auth-btn">Sign Up</button>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-container">
+            <!-- Vertical Menu -->
+            <nav class="vertical-menu">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="categories.html">Categories</a>
+                        <ul class="submenu">
+                            <li><a href="categories.html#shirts">Shirts</a></li>
+                            <li><a
+                                    href="categories.html#tshirts">T-Shirts</a></li>
+                            <li><a href="categories.html#pants">Pants</a></li>
+                            <li><a href="categories.html#jeans">Jeans</a></li>
+                            <li><a href="categories.html#suits">Suits</a></li>
+                            <li><a
+                                    href="categories.html#accessories">Accessories</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    <li><a href="bestsellers.html">Best Sellers</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Image Slider -->
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide active">
+                            <img src="images/slider1.jpg"
+                                alt="Summer Collection">
+                            <div class="slide-content">
+                                <h2>Summer Collection 2023</h2>
+                                <p>Up to 40% off on selected items</p>
+                                <a href="sale.html" class="btn">Shop Now</a>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/slider2.jpg" alt="Formal Wear">
+                            <div class="slide-content">
+                                <h2>Premium Formal Wear</h2>
+                                <p>Elevate your professional style</p>
+                                <a href="categories.html#suits"
+                                    class="btn">Explore</a>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/slider3.jpg"
+                                alt="Casual Collection">
+                            <div class="slide-content">
+                                <h2>Casual Collection</h2>
+                                <p>Comfort meets style</p>
+                                <a href="categories.html#tshirts"
+                                    class="btn">View Collection</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-btn prev"><i
+                            class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn next"><i
+                            class="fas fa-chevron-right"></i></button>
+                    <div class="slider-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                    </div>
+                </div>
+
+                <!-- Featured Products -->
+                <section class="featured-products">
+                    <h2 class="section-title">Featured Products</h2>
+                    <div class="product-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <div class="product-thumbnail">
+                                <img src="images/product1.jpg"
+                                    alt="Slim Fit Shirt" class="product-img">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn"
+                                        data-product-id="1">Quick View</button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Slim Fit Cotton
+                                    Shirt</h3>
+                                <p class="product-price">Rs 1000</p>
+                                <button class="add-to-cart-btn"
+                                    data-product-id="1">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <div class="product-thumbnail">
+                                <img src="images/product2.jpg"
+                                    alt="Casual T-Shirt" class="product-img">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn"
+                                        data-product-id="2">Quick View</button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Jackets</h3>
+                                <p class="product-price">Rs 3200</p>
+                                <button class="add-to-cart-btn"
+                                    data-product-id="2">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <div class="product-thumbnail">
+                                <img src="images/product3.jpg"
+                                    alt="Denim Jeans"
+                                    class="product-img">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn"
+                                        data-product-id="3">Quick View</button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title"> Denim Pants</h3>
+                                <p class="product-price">Rs 1700</p>
+                                <button class="add-to-cart-btn"
+                                    data-product-id="3">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="product-card">
+                            <div class="product-thumbnail">
+                                <img src="images/product4.jpg" alt="Formal Suit"
+                                    class="product-img">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn"
+                                        data-product-id="4">Quick View</button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Classic Fit Formal
+                                    Suit</h3>
+                                <p class="product-price">Rs 6000</p>
+                                <button class="add-to-cart-btn"
+                                    data-product-id="4">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Categories Section -->
+                <section class="categories-section">
+                    <h2 class="section-title">Shop by Category</h2>
+                    <div class="category-grid">
+                        <a href="categories.html#shirts" class="category-card">
+                            <img src="images/category-shirts.jpg" alt="Shirts">
+                            <h3>Shirts</h3>
+                        </a>
+                        <a href="categories.html#tshirts" class="category-card">
+                            <img src="images/category-tshirts.jpg"
+                                alt="T-Shirts">
+                            <h3>T-Shirts</h3>
+                        </a>
+                        <a href="categories.html#pants" class="category-card">
+                            <img src="images/category-pants.jpeg" alt="Pants">
+                            <h3>Pants</h3>
+                        </a>
+                        <a href="categories.html#suits" class="category-card">
+                            <img src="images/category-suits.jpeg" alt="Suits">
+                            <h3>Suits</h3>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Male-Closet</h3>
+                    <p>Premium men's fashion for every occasion. Elevate your
+                        style with our curated collection.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="categories.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fashion St,
+                        Style City</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@malecloset.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <h4>Subscribe to our newsletter</h4>
+                        <form>
+                            <input type="email" placeholder="Your email">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Male-Closet. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Login Overlay Form -->
+        <div id="login-overlay" class="overlay">
+            <div class="overlay-content">
+                <span class="close-btn">&times;</span>
+                <h2>Login</h2>
+                <form action="login.php" method="post">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password"
+                            name="password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" id="switch-to-signup">Sign
+                        up</a></p>
+            </div>
+        </div>
+
+        <!-- Signup Overlay Form -->
+        <div id="signup-overlay" class="overlay">
+            <div class="overlay-content">
+                <span class="close-btn">&times;</span>
+                <h2>Sign Up</h2>
+                <form action="signup.php" method="post">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" name="name"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" name="email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password"
+                            name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm
+                            Password</label>
+                        <input type="password" id="signup-confirm-password"
+                            name="confirm_password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                </form>
+                <p>Already have an account? <a href="#"
+                        id="switch-to-login">Login</a></p>
+            </div>
+        </div>
+
+        <!-- Product Quick View Modal -->
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="product-details">
+                    <div class="product-images">
+                        <div class="main-image">
+                            <img id="modal-main-image" src="/placeholder.svg"
+                                alt="Product Image">
+                        </div>
+                        <div class="thumbnail-images">
+                            <img class="thumbnail" src="/placeholder.svg"
+                                alt="Thumbnail 1">
+                            <img class="thumbnail" src="/placeholder.svg"
+                                alt="Thumbnail 2">
+                            <img class="thumbnail" src="/placeholder.svg"
+                                alt="Thumbnail 3">
+                        </div>
+                    </div>
+                    <div class="product-info-details">
+                        <h2 id="modal-product-title"></h2>
+                        <p class="product-price" id="modal-product-price"></p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(24 reviews)</span>
+                        </div>
+                        <div class="product-description">
+                            <p id="modal-product-description"></p>
+                        </div>
+                        <div class="product-options">
+                            <div class="size-selection">
+                                <h4>Size:</h4>
+                                <div class="size-options">
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                    <button class="size-btn">XL</button>
+                                </div>
+                            </div>
+                            <div class="color-selection">
+                                <h4>Color:</h4>
+                                <div class="color-options">
+                                    <button class="color-btn"
+                                        style="background-color: #000;"></button>
+                                    <button class="color-btn"
+                                        style="background-color: #2c4f7c;"></button>
+                                    <button class="color-btn"
+                                        style="background-color: #6e4a3d;"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quantity-selection">
+                            <h4>Quantity:</h4>
+                            <div class="quantity-input">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" value="1" min="1" max="10">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn"
+                                id="modal-add-to-cart">Add to Cart</button>
+                            <button class="wishlist-btn"><i
+                                    class="far fa-heart"></i> Add to
+                                Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>

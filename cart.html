@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shopping Cart - Male-Closet</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+        .cart-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .cart-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .cart-empty {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-empty i {
+            font-size: 60px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .cart-empty p {
+            font-size: 18px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+        
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-table th {
+            background-color: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .cart-table td {
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .cart-product {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-product img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+        
+        .cart-product-info h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .cart-product-info p {
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .cart-quantity {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-quantity button {
+            width: 30px;
+            height: 30px;
+            background-color: #f1f1f1;
+            border: none;
+            font-size: 16px;
+        }
+        
+        .cart-quantity input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+        }
+        
+        .cart-remove {
+            color: #e74c3c;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        .cart-summary {
+            margin-top: 30px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-summary h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-row.total {
+            font-weight: 600;
+            font-size: 18px;
+            border-bottom: none;
+            margin-top: 20px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .continue-shopping {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .continue-shopping:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-table thead {
+                display: none;
+            }
+            
+            .cart-table, .cart-table tbody, .cart-table tr, .cart-table td {
+                display: block;
+                width: 100%;
+            }
+            
+            .cart-table tr {
+                margin-bottom: 20px;
+                border: 1px solid #eee;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            
+            .cart-table td {
+                text-align: right;
+                padding: 10px 15px;
+                position: relative;
+            }
+            
+            .cart-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                font-weight: 600;
+                color: #2c3e50;
+            }
+            
+            .cart-product {
+                justify-content: flex-end;
+            }
+            
+            .cart-quantity {
+                justify-content: flex-end;
+            }
+        }
+    </style>
+    </head>
+    <body>
+        <!-- Header Section -->
+        <header>
+            <div class="logo-container">
+                <img src="images/logo.png" alt="Male-Closet Logo" class="logo">
+                <h1 class="site-title">Male-Closet</h1>
+            </div>
+            <div class="header-right">
+                <div class="search-social">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search products...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button id="login-btn" class="auth-btn">Login</button>
+                    <button id="signup-btn" class="auth-btn">Sign Up</button>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="cart-container">
+            <h1 class="cart-title">Your Shopping Cart</h1>
+
+            <div id="cart-content">
+                <!-- Cart items will be loaded here via JavaScript -->
+                <div class="cart-empty">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                    <a href="index.html" class="btn">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Male-Closet</h3>
+                    <p>Premium men's fashion for every occasion. Elevate your
+                        style with our curated collection.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="categories.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fashion St,
+                        Style City</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@malecloset.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <h4>Subscribe to our newsletter</h4>
+                        <form>
+                            <input type="email" placeholder="Your email">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Male-Closet. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Login Overlay Form -->
+        <div id="login-overlay" class="overlay">
+            <div class="overlay-content">
+                <span class="close-btn">&times;</span>
+                <h2>Login</h2>
+                <form action="login.php" method="post">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password"
+                            name="password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" id="switch-to-signup">Sign
+                        up</a></p>
+            </div>
+        </div>
+
+        <!-- Signup Overlay Form -->
+        <div id="signup-overlay" class="overlay">
+            <div class="overlay-content">
+                <span class="close-btn">&times;</span>
+                <h2>Sign Up</h2>
+                <form action="signup.php" method="post">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" name="name"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" name="email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password"
+                            name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm
+                            Password</label>
+                        <input type="password" id="signup-confirm-password"
+                            name="confirm_password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                </form>
+                <p>Already have an account? <a href="#"
+                        id="switch-to-login">Login</a></p>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load cart items from localStorage
+            const cartContent = document.getElementById('cart-content');
+            let cartItems = [];
+            
+            if (localStorage.getItem('cartItems')) {
+                cartItems = JSON.parse(localStorage.getItem('cartItems'));
+                updateCartDisplay();
+            }
+            
+            function updateCartDisplay() {
+                if (cartItems.length === 0) {
+                    cartContent.innerHTML = `
+                        <div class="cart-empty">
+                            <i class="fas fa-shopping-cart"></i>
+                            <p>Your cart is empty</p>
+                            <a href="index.html" class="btn">Continue Shopping</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let subtotal = 0;
+                
+                // Calculate subtotal
+                cartItems.forEach(item => {
+                    const price = parseFloat(item.price.replace('$', ''));
+                    subtotal += price * item.quantity;
+                });
+                
+                const shipping = 10; // Fixed shipping cost
+                const total = subtotal + shipping;
+                
+                cartContent.innerHTML = `
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                            ${cartItems.map((item, index) => `
+                                <tr>
+                                    <td data-label="Product">
+                                        <div class="cart-product">
+                                            <img src="${item.image}" alt="${item.title}">
+                                            <div class="cart-product-info">
+                                                <h3>${item.title}</h3>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-label="Price">${item.price}</td>
+                                    <td data-label="Quantity">
+                                        <div class="cart-quantity">
+                                            <button class="quantity-decrease" data-index="${index}">-</button>
+                                            <input type="number" value="${item.quantity}" min="1" max="10" data-index="${index}">
+                                            <button class="quantity-increase" data-index="${index}">+</button>
+                                        </div>
+                                    </td>
+                                    <td data-label="Total">$${(parseFloat(item.price.replace('$', '')) * item.quantity).toFixed(2)}</td>
+                                    <td>
+                                        <button class="cart-remove" data-index="${index}"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    
+                    <div class="cart-summary">
+                        <h2>Order Summary</h2>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>$${subtotal.toFixed(2)}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>$${shipping.toFixed(2)}</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span>$${total.toFixed(2)}</span>
+                        </div>
+                        <button class="checkout-btn">Proceed to Checkout</button>
+                    </div>
+                    
+                    <a href="index.html" class="continue-shopping">Continue Shopping</a>
+                `;
+                
+                // Add event listeners for quantity buttons and remove buttons
+                document.querySelectorAll('.quantity-decrease').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        if (cartItems[index].quantity > 1) {
+                            cartItems[index].quantity--;
+                            updateCart();
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-increase').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        if (cartItems[index].quantity < 10) {
+                            cartItems[index].quantity++;
+                            updateCart();
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.cart-quantity input').forEach(input => {
+                    input.addEventListener('change', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        const value = parseInt(this.value);
+                        
+                        if (value >= 1 && value <= 10) {
+                            cartItems[index].quantity = value;
+                        } else if (value < 1) {
+                            cartItems[index].quantity = 1;
+                            this.value = 1;
+                        } else {
+                            cartItems[index].quantity = 10;
+                            this.value = 10;
+                        }
+                        
+                        updateCart();
+                    });
+                });
+                
+                document.querySelectorAll('.cart-remove').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        cartItems.splice(index, 1);
+                        updateCart();
+                    });
+                });
+                
+                // Checkout button
+                document.querySelector('.checkout-btn').addEventListener('click', function() {
+                    alert('Checkout functionality would be implemented here.');
+                    // In a real application, this would redirect to a checkout page
+                });
+            }
+            
+            function updateCart() {
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                updateCartDisplay();
+                
+                // Update cart count in header
+                const cartCount = document.querySelector('.cart-count');
+                cartCount.textContent = cartItems.length;
+            }
+        });
+    </script>
+    </body>
+</html>

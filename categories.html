@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Male-Closet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .categories-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .category-header h1 {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .category-header p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .category-sections {
+            margin-top: 60px;
+        }
+        
+        .category-section {
+            margin-bottom: 60px;
+        }
+        
+        .category-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .category-section-header h2 {
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        
+        .view-all {
+            color: #3498db;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .view-all:hover {
+            color: #2980b9;
+        }
+        
+        .filter-sort {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .filter-sort-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .filter-sort-header h3 {
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .filter-sort-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group h4 {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .price-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .price-range input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .apply-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+        }
+        
+        .reset-btn {
+            background-color: white;
+            color: #777;
+            border: 1px solid #ddd;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .pagination a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border-radius: 4px;
+            background-color: white;
+            color: #2c3e50;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .pagination a:hover, .pagination a.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .pagination .prev, .pagination .next {
+            width: auto;
+            padding: 0 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-sort-options {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Male-Closet Logo" class="logo">
+            <h1 class="site-title">Male-Closet</h1>
+        </div>
+        <div class="header-right">
+            <div class="search-social">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button id="login-btn" class="auth-btn">Login</button>
+                <button id="signup-btn" class="auth-btn">Sign Up</button>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Vertical Menu -->
+        <nav class="vertical-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="categories.html" class="active">Categories</a>
+                    <ul class="submenu">
+                        <li><a href="#shirts">Shirts</a></li>
+                        <li><a href="#tshirts">T-Shirts</a></li>
+                        <li><a href="#pants">Pants</a></li>
+                        <li><a href="#jeans">Jeans</a></li>
+                        <li><a href="#suits">Suits</a></li>
+                        <li><a href="#accessories">Accessories</a></li>
+                    </ul>
+                </li>
+                <li><a href="new-arrivals.html">New Arrivals</a></li>
+                <li><a href="bestsellers.html">Best Sellers</a></li>
+                <li><a href="sale.html">Sale</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <div class="categories-container">
+                <div class="category-header">
+                    <h1>Shop by Category</h1>
+                    <p>Explore our curated collection of premium men's fashion. From casual essentials to formal attire, find the perfect pieces to elevate your style.</p>
+                </div>
+                
+                <div class="filter-sort">
+                    <div class="filter-sort-header">
+                        <h3>Filter & Sort</h3>
+                    </div>
+                    <div class="filter-sort-options">
+                        <div class="filter-group">
+                            <h4>Category</h4>
+                            <select id="category-filter">
+                                <option value="">All Categories</option>
+                                <option value="shirts">Shirts</option>
+                                <option value="tshirts">Jackets</option>
+                                <option value="pants">Pants</option>
+                                <option value="jeans">Jeans</option>
+                                <option value="suits">Suits</option>
+                                <option value="accessories">Accessories</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <h4>Size</h4>
+                            <select id="size-filter">
+                                <option value="">All Sizes</option>
+                                <option value="s">S</option>
+                                <option value="m">M</option>
+                                <option value="l">L</option>
+                                <option value="xl">XL</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <h4>Color</h4>
+                            <select id="color-filter">
+                                <option value="">All Colors</option>
+                                <option value="black">Black</option>
+                                <option value="blue">Blue</option>
+                                <option value="white">White</option>
+                                <option value="brown">Brown</option>
+                                <option value="navy">Navy</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <h4>Price Range</h4>
+                            <div class="price-range">
+                                <input type="number" id="min-price" placeholder="Min">
+                                <span>-</span>
+                                <input type="number" id="max-price" placeholder="Max">
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <h4>Sort By</h4>
+                            <select id="sort-by">
+                                <option value="popularity">Popularity</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn reset-btn">Reset</button>
+                        <button class="filter-btn apply-btn">Apply Filters</button>
+                    </div>
+                </div>
+                
+                <div class="category-sections">
+                    <!-- Shirts Section -->
+                    <div id="shirts" class="category-section">
+                        <div class="category-section-header">
+                            <h2>Shirts</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-grid">
+                            <!-- Product 1 -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product1.jpg" alt="Slim Fit Shirt" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="1">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Slim Fit Cotton Shirt</h3>
+                                    <p class="product-price">Rs 800</p>
+                                    <button class="add-to-cart-btn" data-product-id="1">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <!-- More shirt products would be here -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product1-2.jpg" alt="Oxford Shirt" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="5">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Oxford Button-Down Shirt</h3>
+                                    <p class="product-price">Rs 900</p>
+                                    <button class="add-to-cart-btn" data-product-id="5">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product1-3.jpg" alt="Dress Shirt" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="6">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Formal Dress Shirt</h3>
+                                    <p class="product-price">Rs 1200</p>
+                                    <button class="add-to-cart-btn" data-product-id="6">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product1.jpg" alt="Casual Shirt" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="7">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Casual Linen Shirt</h3>
+                                    <p class="product-price">Rs 700</p>
+                                    <button class="add-to-cart-btn" data-product-id="7">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- T-Shirts Section -->
+                    <div id="tshirts" class="category-section">
+                        <div class="category-section-header">
+                            <h2>Jackets</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-grid">
+                            <!-- Product 1 -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product2.jpg" alt="Cotton T-Shirt" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="2">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Premium Jackets</h3>
+                                    <p class="product-price">Rs 3200</p>
+                                    <button class="add-to-cart-btn" data-product-id="2">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <!-- More t-shirt products would be here -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product2-2.jpg" alt="V-Neck T-Shirt" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="8">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">V-Neck jackets</h3>
+                                    <p class="product-price">Rs 3500</p>
+                                    <button class="add-to-cart-btn" data-product-id="8">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product2-3.jpg" alt="Henley T-Shirt" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="9">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Henley Long Sleeve jackets</h3>
+                                    <p class="product-price">Rs 4600</p>
+                                    <button class="add-to-cart-btn" data-product-id="9">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product2.jpg" alt="Graphic T-Shirt" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="10">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Graphic Print jackets</h3>
+                                    <p class="product-price">Rs 3800</p>
+                                    <button class="add-to-cart-btn" data-product-id="10">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pants & Jeans Section -->
+                    <div id="pants" class="category-section">
+                        <div class="category-section-header">
+                            <h2>Pants & Jeans</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-grid">
+                            <!-- Product 1 -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product3.jpg" alt="Denim Jeans" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="3">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Slim Fit Denim Jeans</h3>
+                                    <p class="product-price">Rs 1700</p>
+                                    <button class="add-to-cart-btn" data-product-id="3">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <!-- More pants products would be here -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product3-2.jpg" alt="Chino Pants" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="11">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Slim Fit Chino Pants</h3>
+                                    <p class="product-price">Rs 1000</p>
+                                    <button class="add-to-cart-btn" data-product-id="11">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product3-3.jpg" alt="Dress Pants" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn" data-product-id="12">Quick View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Formal Dress Pants</h3>
+                                    <p class="product-price">Rs 1400</p>
+                                    <button class="add-to-cart-btn" data-product-id="12">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product3.jpg" alt

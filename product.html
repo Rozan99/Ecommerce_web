@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Product Details - Male-Closet</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+        .product-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .product-details {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-images {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+        }
+        
+        .main-image {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .main-image img {
+            max-height: 400px;
+            object-fit: contain;
+        }
+        
+        .thumbnail-images {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .thumbnail:hover, .thumbnail.active {
+            border-color: #3498db;
+        }
+        
+        .product-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            border-left: 1px solid #eee;
+        }
+        
+        .product-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .product-price {
+            font-size: 22px;
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .product-rating {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+        
+        .product-rating span {
+            color: #777;
+            margin-left: 10px;
+        }
+        
+        .product-description {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .product-options {
+            margin-bottom: 20px;
+        }
+        
+        .size-selection, .color-selection {
+            margin-bottom: 15px;
+        }
+        
+        .size-options, .color-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        
+        .size-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ddd;
+            background-color: white;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .size-btn:hover, .size-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .color-btn:hover, .color-btn.active {
+            transform: scale(1.2);
+        }
+        
+        .quantity-selection {
+            margin-bottom: 20px;
+        }
+        
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #f1f1f1;
+            border: none;
+            font-size: 16px;
+        }
+        
+        .quantity-input input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .add-to-cart-btn {
+            padding: 12px 30px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .wishlist-btn {
+            padding: 12px 20px;
+            background-color: white;
+            color: #2c3e50;
+            border: 1px solid #2c3e50;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .wishlist-btn:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .product-meta {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .product-meta p {
+            margin-bottom: 10px;
+            color: #777;
+        }
+        
+        .product-meta span {
+            color: #2c3e50;
+        }
+        
+        .product-tabs {
+            margin-top: 40px;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab-btn {
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+            color: #777;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+        
+        .tab-content {
+            padding: 30px;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        .related-products {
+            margin-top: 60px;
+        }
+        
+        .related-products h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .related-products h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #3498db;
+            margin: 10px auto 0;
+        }
+        
+        @media (max-width: 768px) {
+            .product-details {
+                flex-direction: column;
+            }
+            
+            .product-info {
+                border-left: none;
+                border-top: 1px solid #eee;
+            }
+            
+            .tabs-nav {
+                flex-wrap: wrap;
+            }
+            
+            .tab-btn {
+                flex: 1;
+                min-width: 120px;
+                text-align: center;
+                padding: 10px;
+            }
+        }
+    </style>
+    </head>
+    <body>
+        <!-- Header Section -->
+        <header>
+            <div class="logo-container">
+                <img src="images/logo.png" alt="Male-Closet Logo" class="logo">
+                <h1 class="site-title">Male-Closet</h1>
+            </div>
+            <div class="header-right">
+                <div class="search-social">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search products...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button id="login-btn" class="auth-btn">Login</button>
+                    <button id="signup-btn" class="auth-btn">Sign Up</button>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-container">
+            <!-- Vertical Menu -->
+            <nav class="vertical-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="categories.html">Categories</a>
+                        <ul class="submenu">
+                            <li><a href="categories.html#shirts">Shirts</a></li>
+                            <li><a
+                                    href="categories.html#tshirts">T-Shirts</a></li>
+                            <li><a href="categories.html#pants">Pants</a></li>
+                            <li><a href="categories.html#jeans">Jeans</a></li>
+                            <li><a href="categories.html#suits">Suits</a></li>
+                            <li><a
+                                    href="categories.html#accessories">Accessories</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    <li><a href="bestsellers.html">Best Sellers</a></li>
+                    <li><a href="sale.html">Sale</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="product-container">
+                    <div class="product-details">
+                        <div class="product-images">
+                            <div class="main-image">
+                                <img id="main-product-image"
+                                    src="images/product1.jpg"
+                                    alt="Slim Fit Cotton Shirt">
+                            </div>
+                            <div class="thumbnail-images">
+                                <img class="thumbnail active"
+                                    src="images/product1.jpg" alt="Thumbnail 1"
+                                    onclick="changeImage('images/product1.jpg')">
+                                <img class="thumbnail"
+                                    src="images/product1-2.jpg"
+                                    alt="Thumbnail 2"
+                                    onclick="changeImage('images/product1-2.jpg')">
+                                <img class="thumbnail"
+                                    src="images/product1-3.jpg"
+                                    alt="Thumbnail 3"
+                                    onclick="changeImage('images/product1-3.jpg')">
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h1 class="product-title">Slim Fit Cotton Shirt</h1>
+                            <p class="product-price">$49.99</p>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(24 reviews)</span>
+                            </div>
+                            <div class="product-description">
+                                <p>This premium slim-fit shirt is crafted from
+                                    high-quality cotton fabric that offers
+                                    exceptional comfort and breathability. The
+                                    modern cut provides a sleek silhouette while
+                                    maintaining comfort throughout the day.
+                                    Perfect for both casual and formal
+                                    occasions.</p>
+                            </div>
+                            <div class="product-options">
+                                <div class="size-selection">
+                                    <h4>Size:</h4>
+                                    <div class="size-options">
+                                        <button class="size-btn">S</button>
+                                        <button class="size-btn">M</button>
+                                        <button class="size-btn">L</button>
+                                        <button class="size-btn">XL</button>
+                                    </div>
+                                </div>
+                                <div class="color-selection">
+                                    <h4>Color:</h4>
+                                    <div class="color-options">
+                                        <button class="color-btn"
+                                            style="background-color: #000;"></button>
+                                        <button class="color-btn"
+                                            style="background-color: #2c4f7c;"></button>
+                                        <button class="color-btn"
+                                            style="background-color: #6e4a3d;"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quantity-selection">
+                                <h4>Quantity:</h4>
+                                <div class="quantity-input">
+                                    <button
+                                        class="quantity-btn minus">-</button>
+                                    <input type="number" value="1" min="1"
+                                        max="10" id="product-quantity">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart-btn"
+                                    id="add-to-cart">Add to Cart</button>
+                                <button class="wishlist-btn"><i
+                                        class="far fa-heart"></i> Add to
+                                    Wishlist</button>
+                            </div>
+                            <div class="product-meta">
+                                <p><strong>SKU:</strong>
+                                    <span>SFS-001</span></p>
+                                <p><strong>Category:</strong>
+                                    <span>Shirts</span></p>
+                                <p><strong>Tags:</strong> <span>Cotton, Slim
+                                        Fit, Formal, Casual</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-tabs">
+                        <div class="tabs-nav">
+                            <button class="tab-btn active"
+                                data-tab="description">Description</button>
+                            <button class="tab-btn"
+                                data-tab="additional">Additional
+                                Information</button>
+                            <button class="tab-btn" data-tab="reviews">Reviews
+                                (24)</button>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="description">
+                                <h3>Product Description</h3>
+                                <p>This premium slim-fit shirt is crafted from
+                                    high-quality cotton fabric that offers
+                                    exceptional comfort and breathability. The
+                                    modern cut provides a sleek silhouette while
+                                    maintaining comfort throughout the day.</p>
+                                <p>Features:</p>
+                                <ul>
+                                    <li>100% premium cotton</li>
+                                    <li>Slim fit design</li>
+                                    <li>Button-down collar</li>
+                                    <li>Single-button cuffs</li>
+                                    <li>Chest pocket</li>
+                                    <li>Machine washable</li>
+                                </ul>
+                                <p>Perfect for both casual and formal occasions,
+                                    this versatile shirt pairs well with jeans
+                                    for a smart-casual look or with dress pants
+                                    for more formal settings.</p>
+                            </div>
+                            <div class="tab-pane" id="additional">
+                                <h3>Additional Information</h3>
+                                <table>
+                                    <tr>
+                                        <th>Material</th>
+                                        <td>100% Cotton</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fit</th>
+                                        <td>Slim Fit</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Collar</th>
+                                        <td>Button-Down</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cuff</th>
+                                        <td>Single-Button</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Care Instructions</th>
+                                        <td>Machine wash cold, tumble dry
+                                            low</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Country of Origin</th>
+                                        <td>Italy</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="reviews">
+                                <h3>Customer Reviews</h3>
+                                <div class="review">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <h4>Perfect fit and great quality</h4>
+                                        <p>By John D. on May 15, 2023</p>
+                                    </div>
+                                    <div class="review-content">
+                                        <p>I'm extremely satisfied with this
+                                            shirt. The fit is perfect and the
+                                            material feels premium. Will
+                                            definitely buy more colors!</p>
+                                    </div>
+                                </div>
+                                <div class="review">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <h4>Good shirt, slightly tight in the
+                                            shoulders</h4>
+                                        <p>By Michael T. on April 28, 2023</p>
+                                    </div>
+                                    <div class="review-content">
+                                        <p>The quality of the shirt is
+                                            excellent, but I found it a bit
+                                            tight in the shoulders. Consider
+                                            sizing up if you have broader
+                                            shoulders.</p>
+                                    </div>
+                                </div>
+                                <div class="review">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <h4>Versatile and comfortable</h4>
+                                        <p>By Robert K. on April 10, 2023</p>
+                                    </div>
+                                    <div class="review-content">
+                                        <p>I've worn this shirt for both casual
+                                            and formal occasions, and it works
+                                            great for both. The fabric is
+                                            breathable and comfortable even
+                                            after a full day of wear.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="related-products">
+                        <h2>You May Also Like</h2>
+                        <div class="product-grid">
+                            <!-- Product 1 -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product2.jpg"
+                                        alt="Casual T-Shirt"
+                                        class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn"
+                                            data-product-id="2">Quick
+                                            View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Premium Cotton
+                                        T-Shirt</h3>
+                                    <p class="product-price">$29.99</p>
+                                    <button class="add-to-cart-btn"
+                                        data-product-id="2">Add to Cart</button>
+                                </div>
+                            </div>
+
+                            <!-- Product 2 -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product3.jpg"
+                                        alt="Denim Jeans" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn"
+                                            data-product-id="3">Quick
+                                            View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Slim Fit Denim
+                                        Jeans</h3>
+                                    <p class="product-price">$59.99</p>
+                                    <button class="add-to-cart-btn"
+                                        data-product-id="3">Add to Cart</button>
+                                </div>
+                            </div>
+
+                            <!-- Product 3 -->
+                            <div class="product-card">
+                                <div class="product-thumbnail">
+                                    <img src="images/product4.jpg"
+                                        alt="Formal Suit" class="product-img">
+                                    <div class="product-overlay">
+                                        <button class="quick-view-btn"
+                                            data-product-id="4">Quick
+                                            View</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Classic Fit Formal
+                                        Suit</h3>
+                                    <p class="product-price">$199.99</p>
+                                    <button class="add-to-cart-btn"
+                                        data-product-id="4">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Male-Closet</h3>
+                    <p>Premium men's fashion for every occasion. Elevate your
+                        style with our curated collection.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="categories.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fashion St,
+                        Style City</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@malecloset.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <h4>Subscribe to our newsletter</h4>
+                        <form>
+                            <input type="email" placeholder="Your email">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Male-Closet. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Login Overlay Form -->
+        <div id="login-overlay" class="overlay">
+            <div class="overlay-content">
+                <span class="close-btn">&times;</span>
+                <h2>Login</h2>
+                <form action="login.php" method="post">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password"
+                            name="password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" id="switch-to-signup">Sign
+                        up</a></p>
+            </div>
+        </div>
+
+        <!-- Signup Overlay Form -->
+        <div id="signup-overlay" class="overlay">
+            <div class="overlay-content">
+                <span class="close-btn">&times;</span>
+                <h2>Sign Up</h2>
+                <form action="signup.php" method="post">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" name="name"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" name="email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password"
+                            name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm
+                            Password</label>
+                        <input type="password" id="signup-confirm-password"
+                            name="confirm_password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                </form>
+                <p>Already have an account? <a href="#"
+                        id="switch-to-login">Login</a></p>
+            </div>
+        </div>
+
+        <!-- Product Quick View Modal -->
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="product-details">
+                    <div class="product-images">
+                        <div class="main-image">
+                            <img id="modal-main-image" src="/placeholder.svg"
+                                alt="Product Image">
+                        </div>
+                        <div class="thumbnail-images">
+                            <img class="thumbnail" src="/placeholder.svg"
+                                alt="Thumbnail 1">
+                            <img class="thumbnail" src="/placeholder.svg"
+                                alt="Thumbnail 2">
+                            <img class="thumbnail" src="/placeholder.svg"
+                                alt="Thumbnail 3">
+                        </div>
+                    </div>
+                    <div class="product-info-details">
+                        <h2 id="modal-product-title"></h2>
+                        <p class="product-price" id="modal-product-price"></p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(24 reviews)</span>
+                        </div>
+                        <div class="product-description">
+                            <p id="modal-product-description"></p>
+                        </div>
+                        <div class="product-options">
+                            <div class="size-selection">
+                                <h4>Size:</h4>
+                                <div class="size-options">
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                    <button class="size-btn">XL</button>
+                                </div>
+                            </div>
+                            <div class="color-selection">
+                                <h4>Color:</h4>
+                                <div class="color-options">
+                                    <button class="color-btn"
+                                        style="background-color: #000;"></button>
+                                    <button class="color-btn"
+                                        style="background-color: #2c4f7c;"></button>
+                                    <button class="color-btn"
+                                        style="background-color: #6e4a3d;"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quantity-selection">
+                            <h4>Quantity:</h4>
+                            <div class="quantity-input">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" value="1" min="1" max="10">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart-btn"
+                                id="modal-add-to-cart">Add to Cart</button>
+                            <button class="wishlist-btn"><i
+                                    class="far fa-heart"></i> Add to
+                                Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Product image gallery
+            function changeImage(src) {
+                document.getElementById('main-product-image').src = src;
+                
+                // Update active thumbnail
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                thumbnails.forEach(thumb => {
+                    if (thumb.src === src) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Make changeImage function global
+            window.changeImage = changeImage;
+            
+            // Size selection
+            const sizeBtns = document.querySelectorAll('.size-btn');
+            sizeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    sizeBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Color selection
+            const colorBtns = document.querySelectorAll('.color-btn');
+            colorBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    colorBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Quantity buttons
+            const minusBtn = document.querySelector('.quantity-btn.minus');
+            const plusBtn = document.querySelector('.quantity-btn.plus');
+            const quantityInput = document.getElementById('product-quantity');
+            
+            minusBtn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            });
+            
+            // Tabs functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and panes
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabPanes.forEach(p => p.classList.remove('active'));
+                    
+                    // Add active class to current button and pane
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Add to cart functionality
+            const addToCartBtn = document.getElementById('add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            let cartItems = [];
+            
+            // Load cart from localStorage
+            if (localStorage.getItem('cartItems')) {
+                cartItems = JSON.parse(localStorage.getItem('cartItems'));
+                cartCount.textContent = cartItems.length;
+            }
+            
+            addToCartBtn.addEventListener('click', function() {
+                // Get selected options
+                const selectedSize = document.querySelector('.size-btn.active')?.textContent || 'M';
+                const selectedColor = document.querySelector('.color-btn.active')?.style.backgroundColor || '#000';
+                const quantity = parseInt(document.getElementById('product-quantity').value) || 1;
+                
+                // Product details
+                const product = {
+                    id: 1, // This would be dynamic in a real application
+                    title: 'Slim Fit Cotton Shirt',
+                    price: '$49.99',
+                    image: 'images/product1.jpg',
+                    size: selectedSize,
+                    color: selectedColor,
+                    quantity: quantity
+                };
+                
+                // Add to cart
+                cartItems.push(product);
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                
+                // Update cart count
+                cartCount.textContent = cartItems.length;
+                
+                // Show confirmation
+                alert('Product added to cart!');
+            });
+        });
+    </script>
+    </body>
+</html>
